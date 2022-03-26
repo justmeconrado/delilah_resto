@@ -1,0 +1,307 @@
+openapi: 3.0.0
+servers:
+  - url: "http://localhost:3000"
+    description: Servidor local
+info:
+  version: 1.0.0
+  title: DelilahRestoConrado
+  description: Proyecto Tercer Sprint DWFS Acámica
+tags:
+  - name: usuarios
+    description: todo usuarios
+  - name: pedidos
+    description: todo pedidos
+  - name: productos
+    description: todo productos
+
+paths:
+  /login:
+    post:
+      tags:
+        - usuarios
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          description: Usuario correctamente logueado
+        "500":
+          description: El usuario y/o el password no corresponden
+  /usuarios:
+    get:
+      tags:
+        - usuarios
+      summary: Get todo usuarios
+      description: "El usuario solo verá sus datos. El administrador, los de todos los usuarios"
+      responses:
+        "200":
+          description: datos del Usuario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuarios"
+        "404":
+          description: Usuario no encontrado
+    post:
+      tags:
+        - usuarios
+      summary: Crea un nuevo usuario
+      description: Crea un nuevo usuario si el nombre de usuario o el mail no existen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuarios"
+      responses:
+        "201":
+          description: usuario creado
+        "500":
+          description: Debe ingresar todos los datos solicitados
+        "409":
+          description: Este usuario ya está en uso, por favor modifique su nombre de usuario
+  /pedidos:
+    get:
+      tags:
+        - pedidos
+      summary: Get todo pedidos
+      description: >-
+        Los usuarios verán sus propios pedidos. El administrador, los de todos los usuarios.
+      responses:
+        "200":
+          description: ok pedido
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pedidos"
+        "500":
+          description: "Error interno de Rol/pedidos"
+    post:
+      tags:
+        - pedidos
+      summary: Nuevo pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pedidos"
+      description: Crea un nuevo pedido
+      responses:
+        "201":
+          description: Pedido creado
+        "500":
+          description: Error interno
+  "/pedidos/{id}":
+    put:
+      tags:
+        - pedidos
+      summary: Modifica el estado del pedido
+      description: Solo el administrador puede modificar el estado de un pedido
+      parameters:
+        - name: id
+          in: path
+          description: Id del pedido para modificar su estado
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pedidos/properties/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                status:
+                  description: Modifica el estado del pedido
+                  type: string
+              required:
+                - status
+      responses:
+        "200":
+          description: Estado del pedido modificado
+        "403":
+          description: Solo un administrador puede modificar el estado del pedido
+        "500":
+          description: Error interno modificar pedido
+    delete:
+      tags:
+        - pedidos
+      summary: Eliminar un pedido
+      description: Solo un administrador puede eliminar un pedido
+      parameters:
+        - name: id
+          in: path
+          description: "Id del pedido es requerido como parámetro "
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pedidos/properties/id"
+      responses:
+        "200":
+          description: Pedido eliminado
+        "403":
+          description: Solo un administrador puede eliminar un pedido
+  /productos:
+    get:
+      tags:
+        - productos
+      summary: Get todo productos
+      description: Todos los usuarios pueden ver la lista de productos
+      responses:
+        "200":
+          description: ok. Lista de productos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Productos"
+        "500":
+          description: Error interno
+    post:
+      tags:
+        - productos
+      summary: Nuevo producto
+      description: "Solo un administrador puede crear un nuevo producto"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Productos"
+      responses:
+        "201":
+          description: Producto creado
+        "500":
+          description: Debe ingresar todos los datos requeridos
+        "403":
+          description: Solo un administrador puede crear nuevos productos
+  "/productos/{id}":
+    put:
+      tags:
+        - productos
+      summary: Modificar un producto pasando su Id como parámetro
+      description: Solo un administrador puede modificar los datos de un producto
+      parameters:
+        - name: id
+          in: path
+          description: "Se requiere el Id del producto para modificarlo"
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Productos/properties/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                price:
+                  description: Modifica el precio del producto
+                  type: string
+                name:
+                  description: Modifica el nombre del producto
+                  type: string
+                stock:
+                  description: Modifica el stock del producto
+                  type: string
+                image:
+                  description: Modifica la imagen del producto
+                  type: string
+                category:
+                  description: Modifica la categoria del producto
+                  type: string
+      responses:
+        "200":
+          description: Producto Modificado
+        "403":
+          description: Solo un administrador puede modificar un producto
+        "500":
+          description: Debe ingresar todos los datos para modificar un producto
+    delete:
+      tags:
+        - productos
+      summary: Eliminar un producto pasando su Id por parámetro
+      description: Solo un administrador puede eliminar un producto
+      parameters:
+        - name: id
+          in: path
+          description: Se debe pasar el Id del producto, por parámetro para poder eliminarlo
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Productos/properties/id"
+      responses:
+        "200":
+          description: Producto eliminado
+        "403":
+          description: Solo un administrador puede eliminar un producto
+        "500":
+          description: Error interno
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      xml:
+        name: Login
+    Usuarios:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        fullname:
+          type: string
+        email:
+          type: string
+        is_admin:
+          type: boolean
+        phone:
+          type: string
+        address:
+          type: string
+        password:
+          type: string
+      xml:
+        name: Usuarios
+    Pedidos:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        status:
+          type: string
+        payment_method:
+          type: string
+        update_time:
+          type: string
+      xml:
+        name: Pedidos
+    Productos:
+      type: object
+      properties:
+        id:
+          type: integer
+        product_name:
+          type: string
+        stock:
+          type: boolean
+        img_url:
+          type: string
+        category:
+          type: string
+      xml:
+        name: Productos

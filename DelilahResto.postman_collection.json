@@ -1,0 +1,355 @@
+{
+  "info": {
+    "_postman_id": "50a0962c-eca2-469d-acbe-613bfdca2f8e",
+    "name": "DelilahRestoEmilio",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "http://localhost:3000/usuarios",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"EmilioOA\",\r\n    \"fullname\":\"Emilio Almeida\",\r\n    \"email\":\"almeida.emiliooscar@gmail.com\",\r\n    \"phone\":\"3516804386\",\r\n    \"address\":\"Gral. Bustos 217\",\r\n    \"password\":\"28Agosto\",\r\n    \"is_admin\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/usuarios",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["usuarios"]
+        },
+        "description": "Crear nuevo usuario."
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"EmilioOA\",\r\n    \"password\":\"28Agosto\"\r\n    \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["login"]
+        },
+        "description": "Login de usuario"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/usuarios",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtaWxpb09BIiwicGFzc3dvcmQiOiIyOEFnb3N0byIsImlhdCI6MTYyODc2MTc2Mn0.Au_Q5YOTOw67p6kNE2YiFxJ12jj3MZnV2XBTqh_aA0U",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/usuarios",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["usuarios"]
+        },
+        "description": "Mostrar lista de usuarios, pasando token de usuario en autorización"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/productos",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtaWxpbyIsInBhc3N3b3JkIjoiMjhBZ29zdG8iLCJpYXQiOjE2Mjg3NjQ2MDN9.23OFScBrSV9VmiLmKJyL-UHgpq_yzP3turgC2WzB8UQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"product_name\" : \"Bife de Chorizo\",\r\n    \"price\" : 650.00,\r\n    \"stock\" : true,\r\n    \"img_url\" : \"https://parrilleria.top/multimedia/bife-de-chorizo-a-la-parrilla.jpg\",\r\n    \"category\" : \"Carnes\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/productos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["productos"]
+        },
+        "description": "Crear nuevos productos. Solo administrador"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/productos",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikp1YW4iLCJwYXNzd29yZCI6IkdpbW5hc2lvMzMiLCJpYXQiOjE2Mjg3NjY2Nzh9.p_IK0ypoDwUZFG3AU17squbFtq_Nw_0zMg99XF8bl_E",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/productos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["productos"]
+        },
+        "description": "Mostrar lista de productos"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/productos/9",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtaWxpbyIsInBhc3N3b3JkIjoiMjhBZ29zdG8iLCJpYXQiOjE2Mjg3Njc4Mzl9.li5z0L3Ty9MD36-TMbsytnMfGqgzX9a6vbc2UbPahzI",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"product_name\" : \"Ñoquis\",\r\n    \"price\" : \"380.00\",\r\n    \"stock\" : true,\r\n    \"img_url\" : \"https://ñoquisdel29.com\",\r\n    \"category\" : \"pastas\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/productos/9",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["productos", "9"]
+        },
+        "description": "Modificar productos, solo Administrador"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/productos/9",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtaWxpbyIsInBhc3N3b3JkIjoiMjhBZ29zdG8iLCJpYXQiOjE2Mjg3Njc4Mzl9.li5z0L3Ty9MD36-TMbsytnMfGqgzX9a6vbc2UbPahzI",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/productos/9",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["productos", "9"]
+        },
+        "description": "Eliminar producto. Solo Administrador"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/pedidos",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikp1YW4iLCJwYXNzd29yZCI6IkdpbW5hc2lvMzMiLCJpYXQiOjE2Mjg3NzUyMDl9.0c_akSWlYknUXwbqS5wlb846drvat5ifg0-NEYu5LE0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": 3,\r\n            \"quantity\": 1\r\n        },{\r\n                \"product_id\": 7,\r\n            \"quantity\": 1 \r\n        }\r\n    ],\r\n    \"payment_method\": \"Efectivo\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/pedidos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["pedidos"]
+        },
+        "description": "Hacer un nuevo pedido"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/pedidos",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikpvc2UiLCJwYXNzd29yZCI6Ik1lc2FkYXMiLCJpYXQiOjE2Mjg3NzU5NjN9.xtmKNPFQTHt08as88oeT02xS6ygFaCm7pvJxXq9c3Tg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/pedidos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["pedidos"]
+        },
+        "description": "Ver su propio pedido, con su Login."
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/pedidos",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtaWxpbyIsInBhc3N3b3JkIjoiMjhBZ29zdG8iLCJpYXQiOjE2Mjg3NzYzNTl9.b5FiFVY2a9io_hygB2aFoosEo8o4ZVp8QEneePNADNA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/pedidos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["pedidos"]
+        },
+        "description": "Ver todos los pedidos, con Token de Administrador"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/pedidos/3",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtaWxpbyIsInBhc3N3b3JkIjoiMjhBZ29zdG8iLCJpYXQiOjE2Mjg3NzgxMzV9.BmKCUNFkvus9qgJcHeQPZLOjWCt7pZ3EXMD7Oasc3Hk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"status\": \"Enviado\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/pedidos/3",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["pedidos", "3"]
+        },
+        "description": "Modificar el estado del Pedido."
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/pedidos/4",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtaWxpbyIsInBhc3N3b3JkIjoiMjhBZ29zdG8iLCJpYXQiOjE2Mjg3Nzg1ODZ9._Ltb0D-BdIrBnd4y4U0oJriiYl7qQbkShADJzSfsqT0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/pedidos/4",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["pedidos", "4"]
+        },
+        "description": "Eliminar pedido, con token de Administrador"
+      },
+      "response": []
+    }
+  ]
+}
